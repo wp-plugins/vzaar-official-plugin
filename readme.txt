@@ -4,7 +4,7 @@ Donate link:
 Tags: vzaar, video, upload, media, video hosting, video uploads, video cdn
 Requires at least: 3.3
 Tested up to: 3.4
-Stable tag: Trunk
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
