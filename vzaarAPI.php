@@ -172,10 +172,10 @@ class vzaarAPI
     {
         //add_options_page('vzaar API Settings', 'vzaar API', 'manage_options', 'vzaarApiSettings', array(&$this, 'vzaarAPISettings'));
 
-        add_menu_page('vzaar media', 'vzaar', 'manage_options', 'vzaar/dialogs/vzaarAPISettings.php', '', plugins_url('vzaar/images/icon.png'), 99);
-        add_submenu_page('vzaar/dialogs/vzaarSettings.php', 'vzaar - Settings', 'Settings', 'manage_options', 'vzaar/dialogs/vzaarAPISettings.php');
-        add_submenu_page('vzaar/dialogs/vzaarAPISettings.php', 'vzaar -  Media', 'Videos', 'manage_options', 'vzaar/media.php');
-        add_submenu_page('vzaar/dialogs/vzaarAPISettings.php', 'vzaar -  Upload', 'Upload', 'manage_options', 'vzaar/upload.php');
+        add_menu_page('vzaar media', 'vzaar', 'manage_options', 'vzaar-official-plugin/dialogs/vzaarAPISettings.php', '', plugins_url('vzaar/images/icon.png'), 99);
+        add_submenu_page('vzaar-official-plugin/dialogs/vzaarSettings.php', 'vzaar - Settings', 'Settings', 'manage_options', 'vzaar-official-plugin/dialogs/vzaarAPISettings.php');
+        add_submenu_page('vzaar-official-plugin/dialogs/vzaarAPISettings.php', 'vzaar -  Media', 'Videos', 'manage_options', 'vzaar-official-plugin/media.php');
+        add_submenu_page('vzaar-official-plugin/dialogs/vzaarAPISettings.php', 'vzaar -  Upload', 'Upload', 'manage_options', 'vzaar-official-plugin/upload.php');
 
     }
 
