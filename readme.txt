@@ -42,5 +42,6 @@ There's two ways of doing this:
 == Changelog ==
 
 2013-01-05 - Initial release
+
 2013-01-19 - Updated documentation
 
