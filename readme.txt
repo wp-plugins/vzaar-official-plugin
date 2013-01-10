@@ -32,7 +32,7 @@ Please note: This plugin requires use of our API, available in the Pro Toolkit. 
 
 You can find this in your vzaar settings, under the tab marked 'Third Party & API'. This plugin requires an account with our Pro Toolkit. To upgrade, please contact sales@vzaar.com
 
-= How do I embed video in a post?
+= How do I embed video in a post? =
 
 There's two ways of doing this:
 
