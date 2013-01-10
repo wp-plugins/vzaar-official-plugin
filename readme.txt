@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-vzaar official media manager makes it easy to upload, manage, and embed your vzaar videos directly from your WordPress installation
+vzaar's official media manager plugin makes it easy to upload, manage, and embed your vzaar videos directly from your WordPress installation
 
 == Description ==
 
