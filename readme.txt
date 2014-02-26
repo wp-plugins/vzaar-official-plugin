@@ -41,6 +41,8 @@ There's two ways of doing this:
 
 == Changelog ==
 
+2014-02-26 - Fixed embed code scaling bug
+
 2013-01-10 - Updated documentation
 
 2013-01-05 - Initial release
