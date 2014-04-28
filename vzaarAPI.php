@@ -1,7 +1,7 @@
 <?php
 /**
  * @package vzaar
- * @version 1.4
+ * @version 1.5
  */
 
 /*
@@ -9,7 +9,7 @@
     Plugin URI: http://vzaar.com
     Description: vzaar is the video hosting for business platform. With the official vzaar WordPress plugin you can manage your video from your WordPress admin section. This includes uploading, editing titles, deleting and previewing video. Logging into vzaar.com in order to copy and paste embed code to publish video on your site can be a time consuming process. The official vzaar WordPress plugin allows you to access your vzaar videos from within your WordPress admin and quickly insert a video into a post or page.
     Author: vzaar
-    Version: 1.4.26022014
+    Version: 1.5.28042014
     Author URI: http://vzaar.com/
 
     Copyright 2012 vzaar (email : support@vzaar.com)

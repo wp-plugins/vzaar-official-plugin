@@ -84,7 +84,7 @@ class Vzaar
 
 		$req = Vzaar::setAuth($_url);
 
-		$c = new HttpRequest($_url);
+		$c = new vzaarHttpRequest($_url);
 
 		array_push($c->headers, $req->to_header());
 		array_push($c->headers, 'User-Agent: Vzaar OAuth Client');
@@ -102,7 +102,7 @@ class Vzaar
 	{
 		$_url = Vzaar::URL_LIVE;
 
-		$c = new HttpRequest($_url . 'api/accounts/' . $account . '.json');
+		$c = new vzaarHttpRequest($_url . 'api/accounts/' . $account . '.json');
 		return AccountType::fromJson($c->send());
 	}
 
@@ -115,7 +115,7 @@ class Vzaar
 	{
 		$_url = Vzaar::URL_LIVE;
 
-		$req = new HttpRequest($_url . 'api/' . $account . '.json');
+		$req = new vzaarHttpRequest($_url . 'api/' . $account . '.json');
 
 		return User::fromJson($req->send());
 	}
@@ -138,7 +138,7 @@ class Vzaar
 
 		if ($status != '') $_url .= '&status' . $status;
 
-		$req = new HttpRequest($_url);
+		$req = new vzaarHttpRequest($_url);
 
 		if ($auth) array_push($req->headers, Vzaar::setAuth($_url, 'GET')->to_header());
 
@@ -165,7 +165,7 @@ class Vzaar
 
 		if ($title != '') $_url .= '&title=' . urlencode($title);
 
-		$req = new HttpRequest($_url);
+		$req = new vzaarHttpRequest($_url);
 
 		if ($auth) array_push($req->headers, Vzaar::setAuth($_url, 'GET')->to_header());
 
@@ -185,7 +185,7 @@ class Vzaar
 	{
 		$_url = Vzaar::URL_LIVE . 'api/videos/' . $id . '.json';
 
-		$req = new HttpRequest($_url);
+		$req = new vzaarHttpRequest($_url);
 
 		if ($auth) array_push($req->headers, Vzaar::setAuth($_url, 'GET')->to_header());
 
@@ -201,7 +201,7 @@ class Vzaar
 	{
 		$signature = Vzaar::getUploadSignature();
 
-		$c = new HttpRequest('https://' . $signature['vzaar-api']['bucket'] . '.s3.amazonaws.com/');
+		$c = new vzaarHttpRequest('https://' . $signature['vzaar-api']['bucket'] . '.s3.amazonaws.com/');
 
 		$c->method = 'POST';
 		$c->uploadMode = true;
@@ -248,7 +248,7 @@ class Vzaar
 
 		$req = Vzaar::setAuth($_url, 'GET');
 
-		$c = new HttpRequest($_url);
+		$c = new vzaarHttpRequest($_url);
 		$c->method = 'GET';
 		array_push($c->headers, $req->to_header());
 		array_push($c->headers, 'User-Agent: Vzaar OAuth Client');
@@ -279,7 +279,7 @@ class Vzaar
 
 		$req = Vzaar::setAuth($_url, 'GET');
 
-		$c = new HttpRequest($_url);
+		$c = new vzaarHttpRequest($_url);
 		$c->method = 'GET';
 		array_push($c->headers, $req->to_header());
 		array_push($c->headers, 'User-Agent: Vzaar OAuth Client');
@@ -295,7 +295,7 @@ class Vzaar
 
 		$data = '<?xml version="1.0" encoding="UTF-8"?><vzaar-api><_method>delete</_method></vzaar-api>';
 
-		$c = new HttpRequest($_url);
+		$c = new vzaarHttpRequest($_url);
 		$c->method = 'DELETE';
 		array_push($c->headers, $req->to_header());
 		array_push($c->headers, 'User-Agent: Vzaar OAuth Client');
@@ -316,7 +316,7 @@ class Vzaar
 		if ($seoUrl != '') $data .= '<seo_url>' . $seoUrl . '</seo_url>';
 		$data .= '</video></vzaar-api>';
 
-		$c = new HttpRequest($_url);
+		$c = new vzaarHttpRequest($_url);
 		$c->method = 'POST';
 		array_push($c->headers, $req->to_header());
 		array_push($c->headers, 'User-Agent: Vzaar OAuth Client');
@@ -359,7 +359,7 @@ class Vzaar
 		if ($transcoding) $data .= '<transcoding>true</transcoding>';
 		$data .= '</video> </vzaar-api>';
 
-		$c = new HttpRequest($_url);
+		$c = new vzaarHttpRequest($_url);
 		$c->verbose = false;
 		$c->method = "POST";
 		array_push($c->headers, $req->to_header());
