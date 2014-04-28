@@ -1,7 +1,7 @@
 <?php
 /**
  * @package vzaar
- * @version 1.3
+ * @version 1.5
  */
 
 /*
@@ -9,7 +9,7 @@
     Plugin URI: http://vzaar.com
     Description: vzaar is the video hosting for business platform. With the official vzaar WordPress plugin you can manage your video from your WordPress admin section. This includes uploading, editing titles, deleting and previewing video. Logging into vzaar.com in order to copy and paste embed code to publish video on your site can be a time consuming process. The official vzaar WordPress plugin allows you to access your vzaar videos from within your WordPress admin and quickly insert a video into a post or page.
     Author: vzaar
-    Version: 1.3.17102012
+    Version: 1.5.28042014
     Author URI: http://vzaar.com/
 
     Copyright 2012 vzaar (email : support@vzaar.com)
@@ -124,13 +124,13 @@ class vzaarAPI
                 
                 playerColors=\"<select id='playerColor'>\";
                     playerColors+='<option value=\"black\">Black</option>';
-				    playerColors+='<option value=\"blue\">Blue</option>';
-				    playerColors+='<option value=\"red\">Red</option>';
-				    playerColors+='<option value=\"green\">Green</option>';
-				    playerColors+='<option value=\"yellow\">Yellow</option>';
-				    playerColors+='<option value=\"pink\">Pink</option>';
-				    playerColors+='<option value=\"orange\">Orange</option>';
-				    playerColors+='<option value=\"brown\">Brown</option>';
+                    playerColors+='<option value=\"blue\">Blue</option>';
+                    playerColors+='<option value=\"red\">Red</option>';
+                    playerColors+='<option value=\"green\">Green</option>';
+                    playerColors+='<option value=\"yellow\">Yellow</option>';
+                    playerColors+='<option value=\"pink\">Pink</option>';
+                    playerColors+='<option value=\"orange\">Orange</option>';
+                    playerColors+='<option value=\"brown\">Brown</option>';
                 playerColors+=\"</select>\";
                 
                 content=\"<center>\"+code+\"</center><br/><br/><table>\";
@@ -172,7 +172,7 @@ class vzaarAPI
     {
         //add_options_page('vzaar API Settings', 'vzaar API', 'manage_options', 'vzaarApiSettings', array(&$this, 'vzaarAPISettings'));
 
-        add_menu_page('vzaar media', 'vzaar', 'manage_options', 'vzaar-official-plugin/dialogs/vzaarAPISettings.php', '', plugins_url('vzaar/images/icon.png'), 99);
+        add_menu_page('vzaar media', 'vzaar', 'manage_options', 'vzaar-official-plugin/dialogs/vzaarAPISettings.php', '', plugins_url('vzaar-official-plugin/images/icon.png'), 99);
         add_submenu_page('vzaar-official-plugin/dialogs/vzaarSettings.php', 'vzaar - Settings', 'Settings', 'manage_options', 'vzaar-official-plugin/dialogs/vzaarAPISettings.php');
         add_submenu_page('vzaar-official-plugin/dialogs/vzaarAPISettings.php', 'vzaar -  Media', 'Videos', 'manage_options', 'vzaar-official-plugin/media.php');
         add_submenu_page('vzaar-official-plugin/dialogs/vzaarAPISettings.php', 'vzaar -  Upload', 'Upload', 'manage_options', 'vzaar-official-plugin/upload.php');
@@ -315,10 +315,11 @@ class vzaarAPI
         $vidDetails = Vzaar::getVideoDetails($vid, true);
 
         $player = $vidDetails->html;
-        $player = str_replace('height="' . $vidDetails->height . '"', 'height="' . $height . '"', $player);
-        $player = str_replace('width="' . $vidDetails->width . '"', 'width="' . $width . '"', $player);
+                
+        $player = preg_replace('/height="(.*?)"/', 'height="' . $height . '"', $player);
+                $player = preg_replace('/width="(.*?)"/', 'width="' . $width . '"', $player);
         $player = str_replace('name="flashvars" value="', 'name="flashvars" value="border=none&colourSet=' . $color . '&', $player);
-
+                
         return $player;
     }
 }
