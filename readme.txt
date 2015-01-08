@@ -41,6 +41,8 @@ There's two ways of doing this:
 
 == Changelog ==
 
+2015-01-08 - Fixed an outdated URL
+
 2014-04-28 - Updated a class name to prevent conflicts
 
 2014-02-26 - Fixed embed code scaling bug
