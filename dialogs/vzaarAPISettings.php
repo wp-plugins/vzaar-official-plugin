@@ -17,7 +17,7 @@ settings_fields('vzaarAPI-settings');
             <td>
                 <input id="vzaarToken" type="text" style="width: 200px;" value="<?php echo get_option('vzaarAPItoken'); ?>"/>
                 &nbsp; <a id="verifyToken" href="#">Verify token</a> |
-                <a href="http://vzaar.com/settings/api" target="_blank">Register/Change API token</a>
+                <a href="http://app.vzaar.com/settings/api" target="_blank">Register/Change API token</a>
             </td>
         </tr>
     </table>
