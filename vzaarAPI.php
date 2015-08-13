@@ -9,7 +9,7 @@
     Plugin URI: http://vzaar.com
     Description: vzaar is the video hosting for business platform. With the official vzaar WordPress plugin you can manage your video from your WordPress admin section. This includes uploading, editing titles, deleting and previewing video. Logging into vzaar.com in order to copy and paste embed code to publish video on your site can be a time consuming process. The official vzaar WordPress plugin allows you to access your vzaar videos from within your WordPress admin and quickly insert a video into a post or page.
     Author: vzaar
-    Version: 1.6.08012015
+    Version: 1.7.13082015
     Author URI: http://vzaar.com/
 
     Copyright 2012 vzaar (email : support@vzaar.com)
@@ -107,21 +107,21 @@ class vzaarAPI
         include(dirname(__FILE__) . "/media.php");
 
         echo "<script>
-            
+
             jQuery('.wrap').css('padding','5px');
-            
+
             jQuery('.addToPostControler').css('visibility','visible');
-            
+
             function addToPost(id,title,description,duration,height,width,code)
             {
                 var addToPostButton=\"<input type='button' class='button-primary' onclick='addPostTags()' style='text-decoration: none;' value='Add to post'/>\";
-                
+
                 title=decodeURIComponent((title+\"\").replace(/\+/g, '%20'));
                 description=decodeURIComponent((description+\"\").replace(/\+/g, '%20'));
                 height=decodeURIComponent((height+\"\").replace(/\+/g, '%20'));
                 width=decodeURIComponent((width+\"\").replace(/\+/g, '%20'));
                 code=decodeURIComponent((code+\"\").replace(/\+/g, '%20'));
-                
+
                 playerColors=\"<select id='playerColor'>\";
                     playerColors+='<option value=\"black\">Black</option>';
                     playerColors+='<option value=\"blue\">Blue</option>';
@@ -132,9 +132,9 @@ class vzaarAPI
                     playerColors+='<option value=\"orange\">Orange</option>';
                     playerColors+='<option value=\"brown\">Brown</option>';
                 playerColors+=\"</select>\";
-                
+
                 content=\"<center>\"+code+\"</center><br/><br/><table>\";
-                    content+=\"<tr><td>Media id:</td><td id='vid'>\"+id+\"</td></tr>\"; 
+                    content+=\"<tr><td>Media id:</td><td id='vid'>\"+id+\"</td></tr>\";
                     content+=\"<tr><td>Title:</td><td>\"+title+\"</td></tr>\";
                     content+=\"<tr><td>Description:</td><td><div style='border: 1px solid silver; width: 400px; height: 100px;'>\"+description+\"</div></td></tr>\";
                     content+=\"<tr><td>Duration:</td><td>\"+duration+\" seconds</td></tr>\";
@@ -143,10 +143,10 @@ class vzaarAPI
                     content+=\"<tr><td>Player color:</td><td>\"+playerColors+\"</td></tr>\";
                     content+=\"<tr><td>Player embed code:</td><td><textarea style='width: 400px; height: 100px; border: 1px solid silver;'>\"+code+\"</textarea></td></tr>\";
                 content+=\"</table>\";
-                
-                playerShow('',content,addToPostButton,\"Adding to post: \"+title);               
+
+                playerShow('',content,addToPostButton,\"Adding to post: \"+title);
             }
-            
+
             function addPostTags()
             {
                 tags='[vzaarmedia';
@@ -155,11 +155,11 @@ class vzaarAPI
                     tags+=' width=\"'+jQuery('#player_holder').find('#vidWidth').val()+'\"';
                     tags+=' color=\"'+jQuery('#player_holder').find('#playerColor').val()+'\"';
                 tags+=']';
-                
+
                 var win=window.dialogArguments || opener || parent || top;
                 win.send_to_editor(tags);
             }
-        
+
         </script>";
     }
 
@@ -252,10 +252,10 @@ class vzaarAPI
 
         if ($token_h && $secret_h) {
             $details = $_POST["details"];
-            
+
             $details = explode("&", $details);
-            
-            
+
+
             foreach ($details as $row => $field) {
                 $field = explode("=", $field);
                 $dataArr[$field[0]] = urldecode($field[1]);
@@ -315,11 +315,11 @@ class vzaarAPI
         $vidDetails = Vzaar::getVideoDetails($vid, true);
 
         $player = $vidDetails->html;
-                
+
         $player = preg_replace('/height="(.*?)"/', 'height="' . $height . '"', $player);
                 $player = preg_replace('/width="(.*?)"/', 'width="' . $width . '"', $player);
         $player = str_replace('name="flashvars" value="', 'name="flashvars" value="border=none&colourSet=' . $color . '&', $player);
-                
+
         return $player;
     }
 }

@@ -16,7 +16,7 @@ vzaar's professional video platform enables you to upload and publish video onli
 
 Now vzaar's official WordPress plugin makes it easy to upload, manage, and embed your vzaar videos without leaving your WordPress admin area.
 
-Please note: This plugin requires use of our API, available in the Pro Toolkit. For more information, please enquire with sales@vzaar.com
+Please note: This plugin requires a read/write API token. You can generate one from your vzaar account's API settings - http://app.vzaar.com/settings/api
 
 == Installation ==
 
@@ -41,6 +41,8 @@ There's two ways of doing this:
 
 == Changelog ==
 
+2015-08-13 - Updated the videos list design and plugin description
+
 2015-01-08 - Fixed an outdated URL
 
 2014-04-28 - Updated a class name to prevent conflicts
@@ -50,7 +52,3 @@ There's two ways of doing this:
 2013-01-10 - Updated documentation
 
 2013-01-05 - Initial release
-
-
-
-

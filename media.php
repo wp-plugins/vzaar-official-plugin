@@ -46,7 +46,7 @@ $baseURL = curPageURL();
 ?>
 
 <div class="wrap">
-<h2 id="page_title">vzaar Hosted Videos</h2>
+<h2 id="page_title" style="margin-left: 1em;">vzaar Hosted Videos</h2>
 
 <div id='loading_filter'><img src='<?php echo(plugins_url('', __FILE__))?>/dialogs/ajax-loader.gif'/> Loading results
     ... please wait!
@@ -80,7 +80,7 @@ $baseURL = curPageURL();
                 Vzaar::$secret = get_option("vzaarAPIusername");
                 Vzaar::$token = get_option("vzaarAPItoken");
                 $video_detail = Vzaar::getVideoDetails($video->id, true);
-                
+
             } catch (Exception $e) {
                 echo 'Caught exception: ', $e->getMessage(), "\n";
             }
@@ -90,59 +90,138 @@ $baseURL = curPageURL();
             }else{
                 $video_status = "Processing";
             }
-            echo "<div class='vid_container' style='float: left; border: 1px solid silver; width: 500px; height: 135px; overflow: scroll; margin: 5px; display: inline-block;'>
-                    <div style='border-right: 1px solid silver; height: 135px; width: 20px; float: left; line-height: 135px; display: inline-block; text-align: center; float: left;'><input type='checkbox' name='vid' value='" . $video->id . "'/></div>
-                    <div style='border-right: 1px solid silver; display: inline-block; height: 135px; text-align: center; line-height: 135px;'>";
-                    if(2 === $video_detail->videoStatus){
-                        echo "<img src='" . $video_detail->thumbnailUrl . "' onerror='imgError(this)' onclick='playerShow(\"" . urlencode($video->title) . "\",\"" . urlencode($video_detail->html) . "\");' style='cursor: pointer; margin: 7px 5px; height: 100px;'/>";
-                    }else{
-                        echo "<div class='missing_img' style='width:133px;height:100px;background:grey;cursor: pointer; margin: 7px 5px;'></div>";
+            echo "<style>
+                    div.vid_container {
+                      float: left;
+                      border: 1px solid silver;
+                      width: 500px;
+                      height: 155px;
+                      overflow: auto;
+                      margin: 5px;
+                      margin-bottom: 15px;
+                      display: inline-block;
                     }
-                    
-                    echo "</div>
-                    <div style='display: inline-block; height: 135px; width: 327px; margin-right: 3px; position: relative; left: -2px; float: right;'>
-                        <style>
-                            td{text-align: left;} 
-                            td.left{text-align: right;}
-                            
-                            div.vid_control {display: inline-block;}
-                            
-                            div.vid_control:hover
-                            {
-                                text-decoration: underline;
-                                cursor: pointer;
-                            }
-                            
-                            div.addToPostControler {display: inline-block;}
-                            
-                            div.addToPostControler:hover
-                            {
-                                text-decoration: underline;
-                                cursor: pointer;
-                            }
-                            div.vid_delete
-                            {
-                                background: white;
-                                color: red;
-                                font-weight: bold;
-                                display: inline-block;
-                                padding: 0px 3px;
-                            }
-                            div.vid_delete:hover
-                            {
-                                background: red;
-                                color: white;
-                                cursor: pointer;
-                            }
-                            
-                            div.videoLinkOptions { display:none; }
-                                
-                        </style>
-                        
+
+                    div.checkbox_container {
+                      border-right: 1px solid silver;
+                      height: 155px;
+                      width: 40px;
+                      float: left;
+                      line-height: 155px;
+                      display: inline-block;
+                      text-align: center;
+                      float: left;
+                    }
+
+                    div.video_table_container {
+                      width: 290px;
+                      display: inline-block;
+                      margin-top: 10px;
+                      margin-left: 20px;
+                      position: relative;
+                      float: left;
+                    }
+
+                    span.video_titles {
+                      white-space: nowrap;
+                      display: block;
+                      text-overflow: ellipsis;
+                      width: 170px;
+                      overflow: hidden;
+                    }
+
+                    td {
+                      text-align: left !important;
+                    }
+
+                    div.vid_control {
+                      display: inline-block;
+                    }
+
+                    div.vid_control:hover {
+                      text-decoration: underline;
+                      cursor: pointer;
+                    }
+
+                    div.addToPostControler {
+                      display: inline-block;
+                    }
+
+                    div.addToPostControler:hover {
+                      text-decoration: underline;
+                      cursor: pointer;
+                    }
+
+                    div.vid_delete {
+                      background: white;
+                      color: red;
+                      font-weight: bold;
+                      display: inline-block;
+                      padding: 0px 3px;
+                    }
+
+                    div.vid_delete:hover {
+                      background: red;
+                      color: white;
+                      cursor: pointer;
+                    }
+
+                    div.videoLinkOptions {
+                      display:none;
+                    }
+
+                    div.videoLinkOptions {
+                      clear: both;
+                      margin-top: 10px;
+                      position: relative;
+                      color: #21759B;
+                    }
+
+                    div.thumb_container {
+                      display: inline-block;
+                      text-align: center;
+                    }
+
+                    img.thumbnail_image {
+                      cursor: pointer;
+                      margin-top: 10px;
+                      clip: rect(0px, 120px, 90px, 0px);
+                      position: absolute;
+                    }
+
+                    div.missing_img {
+                      background:grey;
+                      cursor: pointer;
+                      margin-top: 10px;
+                    }
+
+                    div.page_control {
+                      clear: both;
+                      text-align: center;
+                    }
+
+                    input.button-primary {
+                      text-decoration: none;
+                      margin: 2px;
+                    }
+
+                    div#player_holder {
+                      display: hidden;
+                    }
+                  </style>
+                  <div class='vid_container'>
+                    <div class='checkbox_container'>
+                      <input type='checkbox' name='vid' value='" . $video->id . "'/>
+                    </div>
+                    <div class='video_table_container'>
                         <table>
                             <tr>
                                 <td class='left'>Title:</td>
-                                <td>" . urldecode($video->title) . "</td>
+                                <td>
+                                  <span class='video_titles'>"
+                                    . urldecode($video->title) .
+                                  "</span>
+                                </td>
                             </tr>
                             <tr>
                                 <td class='left'>Duration:</td>
@@ -153,7 +232,7 @@ $baseURL = curPageURL();
                                 <td>" . $video->playCount . "</td>
                             </tr>
                             <tr>
-                                <td class='left'>Media Id:</td>
+                                <td class='left'>Media ID:</td>
                                 <td>" . $video->id . "</td>
                             </tr>
                             <tr>
@@ -163,40 +242,74 @@ $baseURL = curPageURL();
                         </table>
                         <script>
                         jQuery(document).ready(function() {
-                            if(typeof addToPost != 'function') { 
+                            if(typeof addToPost != 'function') {
                                 jQuery('.addToPostControler').remove();
                             }
                             jQuery('.videoLinkOptions').fadeIn('slow');
                          });
                         </script>
-                        <div class='videoLinkOptions' style='clear: both; float: right; position: relative; color: #21759B;'><div class='addToPostControler' onclick='addToPost(\"" . $video->id . "\",\"" . urlencode($video->title) . "\",\"" . urlencode($video_detail->description) . "\",\"" . urlencode($video->duration) . "\",\"" . urlencode($video_detail->height) . "\",\"" . urlencode($video_detail->width) . "\",\"" . urlencode($video_detail->html) . "\");'>Add to post | </div><div class='vid_control' onclick='playerShow(\"" . urlencode($video->title) . "\",\"" . urlencode($video_detail->html) . "\");'>View</div> | <div class='vid_control' onclick='editVideo(\"" . $video->id . "\",\"" . urlencode($video_detail->title) . "\",\"" . urlencode($video_detail->description) . "\")'>Edit</div> | <div class='vid_delete' onclick='deleteVideo(" . $video->id . ")'>Delete</div> </div>
+                        <div class='videoLinkOptions'>
+                          <div class='addToPostControler' onclick='addToPost(
+                            \"" . $video->id . "\",
+                            \"" . urlencode($video->title) . "\",
+                            \"" . urlencode($video_detail->description) . "\",
+                            \"" . urlencode($video->duration) . "\",
+                            \"" . urlencode($video_detail->height) . "\",
+                            \"" . urlencode($video_detail->width) . "\",
+                            \"" . urlencode($video_detail->html) . "\"
+                          );'>Add to post | </div>
+                          <div class='vid_control' onclick='playerShow(
+                            \"" . urlencode($video->title) . "\",
+                            \"" . urlencode($video_detail->html) . "\"
+                          );'>View</div> |
+                          <div class='vid_control' onclick='editVideo(
+                            \"" . $video->id . "\",
+                            \"" . urlencode($video_detail->title) . "\",
+                            \"" . urlencode($video_detail->description) . "\"
+                          )'>Edit</div> |
+                          <div class='vid_delete' onclick='deleteVideo(" . $video->id . ")'>Delete</div>
+                        </div>
                     </div>
+                    <div class='thumb_container'>";
+                    if(2 === $video_detail->videoStatus){
+                        echo "<img src='" . $video_detail->thumbnailUrl . "' onerror='imgError(this)' onclick='playerShow(
+                          \"" . urlencode($video->title) . "\",
+                          \"" . urlencode($video_detail->html) . "\"
+                        );' class='thumbnail_image'/>";
+                    }else{
+                        echo "<div class='missing_img'></div>";
+                    }
+
+                    echo "</div>
                 </div>
                 ";
         }
-        
+
     } else {
         echo 'No data found';
     }
-       echo "<div class='page_control' style='clear: both;'>";
+       echo "<div class='page_control'>";
     //PREVIOUS PAGE
     if ($page > 1) {
-        echo "<input type='button' class=\"button-primary\" onclick='redirect(\"" . str_replace(" ", "", urlencode($baseURL . "&tab=vzaarAPIMedia&vmp=" . ($page - 1))) . "\");' style='text-decoration: none;' value='Previous page'/>";
+        echo "<input type='button' class=\"button-primary\" onclick='redirect(
+          \"" . str_replace(" ", "", urlencode($baseURL . "&tab=vzaarAPIMedia&vmp=" . ($page - 1))) . "\"
+        );' value='Previous page'/>";
     } else {
-        echo "<input type='button' class=\"button-primary\" style='text-decoration: none;' value='Previous page' disabled='disabled'/>";
+        echo "<input type='button' class=\"button-primary\" value='Previous page' disabled='disabled'/>";
     }
 
     //NEXT PAGE BUTTON
     if (hasNextPage($page + 1)) {
-        echo "<input type='button' class=\"button-primary\" onclick='redirect(\"" . str_replace(" ", "", urlencode($baseURL . "&tab=vzaarAPIMedia&vmp=" . ($page + 1))) . "\");' style='text-decoration: none;' value='Next page'/>";
+        echo "<input type='button' class=\"button-primary\" onclick='redirect(
+          \"" . str_replace(" ", "", urlencode($baseURL . "&tab=vzaarAPIMedia&vmp=" . ($page + 1))) . "\"
+        );' value='Next page'/>";
     } else {
-        echo "<input type='button' class=\"button-primary\" style='text-decoration: none;' value='Next page' disabled='disabled'/>";
+        echo "<input type='button' class=\"button-primary\" value='Next page' disabled='disabled'/>";
     }
     echo "</div>";
 
-    echo '<div id="player_holder" style="display: hidden;"></div>';
-    
-    
+    echo '<div id="player_holder"></div>';
+
     ?>
 </form>
 
@@ -305,9 +418,9 @@ $baseURL = curPageURL();
         /* KW
         http://forum.jquery.com/topic/is-jquery-stripping-form-tags#14737000003548757
         <form> elements being stripped when used with .html()
-        Added </form> to the beginning of the content variable and this is the only element stripeed 
+        Added </form> to the beginning of the content variable and this is the only element stripeed
         */
-        
+
         content = "</form><form id='videoDetails'>";
         content += 'Title: <input style="width: 200px;" type="text" name="title" id="title" value="' + title + '"/><br/><br/>';
         content += 'Description: <br/><textarea name="description" rows="10" cols="100" id="description">' + description + '</textarea><br/>';
@@ -336,7 +449,7 @@ $baseURL = curPageURL();
 
             jQuery.post(ajaxurl, data, function (response)
             {
-                
+
                 jQuery("#loading_filter").html(response + " <small>Redirecting back to list in 3 seconds.</small>");
                 setTimeout("closeEditBox()", 3000);
             });
